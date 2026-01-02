@@ -1,7 +1,7 @@
 {
-  "name": "ty-lsp-local",
-  "description": "Local marketplace for ty LSP plugin",
-  "owner": "itsbrex/ty-lsp-local",
+  "name": "ty-lsp",
+  "description": "ty LSP server plugin for Python type checking",
+  "owner": "itsbrex/ty-lsp",
   "plugins": [
     {
       "name": "ty-lsp",
