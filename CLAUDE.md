@@ -47,7 +47,7 @@ The `marketplace.json` (in `.claude-plugin/`) enables local plugin installation.
 {
   "name": "ty-lsp-local",
   "description": "Local marketplace for ty LSP plugin",
-  "owner": "ty-lsp-local",
+  "owner": "brianroach/ty-lsp-local",
   "plugins": [
     {
       "name": "ty-lsp",
@@ -61,7 +61,7 @@ The `marketplace.json` (in `.claude-plugin/`) enables local plugin installation.
 ```
 
 **Key fields**:
-- `owner`: Required marketplace owner identifier
+- `owner`: Required marketplace owner in "owner/repo" format
 - `plugins[].source`: Specifies plugin location (current directory = `"."`)
 - Plugin metadata (description, version, author) belongs in `plugin.json`, not here
 
