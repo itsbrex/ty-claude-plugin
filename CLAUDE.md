@@ -14,12 +14,14 @@ Claude Code plugin integrating **ty** (Astral's extremely fast Python type check
 
 Monorepo with `/ty-lsp-plugin/` as the distributable plugin directory.
 
-**Critical plugin structure rule**: Only `plugin.json` goes inside `.claude-plugin/`. The `.lsp.json` and all other files must be at the plugin root level.
+**Critical plugin structure rule**: Plugin manifest files (`plugin.json` and `marketplace.json`) go inside `.claude-plugin/`. The `.lsp.json` and other files must be at the plugin root level.
 
 ```
 ty-lsp-plugin/
-├── .claude-plugin/plugin.json   # Plugin manifest (ONLY file in this dir)
-├── .lsp.json                    # LSP config (at plugin root, NOT inside .claude-plugin/)
+├── .claude-plugin/
+│   ├── plugin.json              # Plugin manifest
+│   └── marketplace.json         # Local marketplace config
+├── .lsp.json                    # LSP config (at plugin root)
 ├── verify-setup.sh              # Prerequisite verification
 └── test/example.py              # Test file with intentional type errors
 ```
@@ -35,6 +37,50 @@ claude --plugin-dir ./ty-lsp-plugin
 
 # Test ty type checking directly
 uvx ty@latest check ty-lsp-plugin/test/example.py
+```
+
+## Marketplace Configuration
+
+The `marketplace.json` (in `.claude-plugin/`) enables local plugin installation. It references plugins by their location:
+
+```json
+{
+  "name": "ty-lsp-local",
+  "description": "Local marketplace for ty LSP plugin",
+  "owner": "ty-lsp-local",
+  "plugins": [
+    {
+      "name": "ty-lsp",
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  ]
+}
+```
+
+**Key fields**:
+- `owner`: Required marketplace owner identifier
+- `plugins[].source`: Specifies plugin location (current directory = `"."`)
+- Plugin metadata (description, version, author) belongs in `plugin.json`, not here
+
+To use this plugin locally, add to `~/.claude/settings.json`:
+
+```json
+{
+  "enabledPlugins": {
+    "ty-lsp@ty-lsp-local": true
+  },
+  "extraKnownMarketplaces": {
+    "ty-lsp-local": {
+      "source": {
+        "source": "directory",
+        "path": "/path/to/ty-claude-plugin/ty-lsp-plugin"
+      }
+    }
+  }
+}
 ```
 
 ## LSP Configuration

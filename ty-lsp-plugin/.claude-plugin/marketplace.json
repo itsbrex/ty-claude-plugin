@@ -1,17 +1,14 @@
 {
   "name": "ty-lsp-local",
   "description": "Local marketplace for ty LSP plugin",
+  "owner": "ty-lsp-local",
   "plugins": [
     {
-      "id": "ty-lsp",
       "name": "ty-lsp",
-      "description": "ty LSP server plugin for Python type checking and code intelligence. ty is an extremely fast Python type checker written in Rust by Astral.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Brian Roach"
-      },
-      "homepage": "https://docs.astral.sh/ty",
-      "license": "MIT"
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
     }
   ]
 }
