@@ -1,7 +1,7 @@
 {
   "name": "ty-lsp-local",
   "description": "Local marketplace for ty LSP plugin",
-  "owner": "brianroach/ty-lsp-local",
+  "owner": "itsbrex/ty-lsp-local",
   "plugins": [
     {
       "name": "ty-lsp",

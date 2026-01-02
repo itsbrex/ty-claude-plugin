@@ -47,7 +47,7 @@ The `marketplace.json` (in `.claude-plugin/`) enables local plugin installation.
 {
   "name": "ty-lsp-local",
   "description": "Local marketplace for ty LSP plugin",
-  "owner": "brianroach/ty-lsp-local",
+  "owner": "itsbrex/ty-lsp-local",
   "plugins": [
     {
       "name": "ty-lsp",
@@ -92,7 +92,16 @@ The `.lsp.json` configures how Claude Code launches ty:
   "python": {
     "command": "uvx",
     "args": ["ty@latest", "server"],
-    "extensionToLanguage": { ".py": "python", ".pyi": "python" }
+    "extensionToLanguage": {
+      ".py": "python",
+      ".pyi": "python"
+    },
+    "loggingConfig": {
+      "args": ["--verbose"],
+      "env": {
+        "TY_LOG_FILE": "${CLAUDE_PLUGIN_LSP_LOG_FILE}"
+      }
+    }
   }
 }
 ```
@@ -100,6 +109,8 @@ The `.lsp.json` configures how Claude Code launches ty:
 **Key points**:
 - The server command is `server`, NOT `servern` (common typo)
 - `uvx` auto-installs ty; `ty@latest` ensures newest version
+- `loggingConfig`: Enables verbose logging when user runs with `--enable-lsp-logging`
+- `${CLAUDE_PLUGIN_LSP_LOG_FILE}` expands to `~/.claude/debug/` log path
 
 ## Testing
 

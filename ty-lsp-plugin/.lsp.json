@@ -5,6 +5,12 @@
     "extensionToLanguage": {
       ".py": "python",
       ".pyi": "python"
+    },
+    "loggingConfig": {
+      "args": ["--verbose"],
+      "env": {
+        "TY_LOG_FILE": "${CLAUDE_PLUGIN_LSP_LOG_FILE}"
+      }
     }
   }
 }
